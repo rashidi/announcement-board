@@ -3,6 +3,9 @@ language: java
 jdk:
   - oraclejdk7
 
+services:
+  - mongodb
+
 before_script:
   - sleep 15
   - mongo gfk --eval 'db.addUser("gfk", "password");'
