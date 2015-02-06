@@ -4,8 +4,8 @@ jdk:
   - oraclejdk7
 
 before_script:
-  - sleep 60
+  - sleep 15
   - mongo gfk --eval 'db.addUser("gfk", "password");'
 
 install:
-  - gradle clean build -Pdb.uri=mongodb://localhost/gfk -Pdb.username=gfk -Pdb.password=password
+  - gradle clean build -Pdb.uri=mongodb://127.0.0.1/gfk -Pdb.username=gfk -Pdb.password=password
