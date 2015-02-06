@@ -6,6 +6,4 @@ jdk:
 before_script:
   - sleep 15
   - mongo gfk --eval 'db.addUser("gfk", "password");'
-
-script:
-  - TERM=dumb ./gradlew clean build -Pdb.uri=mongodb://localhost/gfk -Pdb.username=gfk -Pdb.password=password
+  - gradle clean build -Pdb.uri=mongodb://localhost/gfk -Pdb.username=gfk -Pdb.password=password
