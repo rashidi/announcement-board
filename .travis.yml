@@ -8,4 +8,4 @@ before_script:
   - mongo gfk --eval 'db.addUser("gfk", "password");'
 
 script:
-  - ./gradlew clean build -Pdb.uri=mongodb://localhost/gfk -Pdb.username=gfk -Pdb.password=password
+  - TERM=dumb ./gradlew clean build -Pdb.uri=mongodb://localhost/gfk -Pdb.username=gfk -Pdb.password=password
