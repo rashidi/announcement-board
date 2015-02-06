@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.*
+
 buildscript {
     ext {
         springBootVersion = '1.2.1.RELEASE'
@@ -51,4 +53,12 @@ eclipse {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.12'
+}
+
+processResources {
+    filter ReplaceTokens, tokens: [
+            "db.uri": project.property("db.uri"),
+            "db.username": project.property("db.username"),
+            "db.password": project.property("db.password")
+    ]
 }
