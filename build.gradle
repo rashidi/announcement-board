@@ -2,20 +2,20 @@ import org.apache.tools.ant.filters.*
 
 buildscript {
     ext {
-        springBootVersion = '1.2.1.RELEASE'
+        springPlatformVersion = '1.1.1.RELEASE'
     }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('io.spring.gradle:dependency-management-plugin:0.3.0.RELEASE')
     }
 }
 
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
-apply plugin: 'spring-boot' 
+apply plugin: 'io.spring.dependency-management'
 apply plugin: 'war'
 
 
@@ -42,6 +42,12 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-websocket")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "io.spring.platform:platform-bom:${springPlatformVersion}"
+    }
 }
 
 eclipse {
