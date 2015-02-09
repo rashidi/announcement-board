@@ -11,4 +11,4 @@ before_script:
   - mongo gfk --eval 'db.addUser("gfk", "password");'
 
 install:
-  - gradle clean build --stacktrace
+  - gradle clean build --debug
