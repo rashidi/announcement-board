@@ -1,4 +1,4 @@
-# Announcement Board
+# Announcement Board [![Build Status](https://travis-ci.org/StarTrackDevKL/announcement-board.svg?branch=master)](https://travis-ci.org/StarTrackDevKL/announcement-board)
 Utilises on web socket
 
 ## Building the Project
