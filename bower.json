@@ -1,0 +1,34 @@
+{
+  "name": "announcement-board",
+  "version": "1.0.0",
+  "appPath": "src/main/resources/static",
+  "homepage": "https://github.com/StarTrackDevKL/announcement-board",
+  "authors": [
+    "Rashidi Zin <rashidi@zin.my>"
+  ],
+  "description": "Announcement board that utilises web socket.",
+  "keywords": [
+    "websocket",
+    "sockjs",
+    "angular",
+    "material",
+    "spring",
+    "boot",
+    "stompjs"
+  ],
+  "license": "WTFPL",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.13",
+    "angular-material": "~0.7.1",
+    "sockjs-client": "~0.3.4",
+    "stomp-websocket": "~2.3.4"
+  }
+}
