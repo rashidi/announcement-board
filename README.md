@@ -5,7 +5,7 @@ Send and receive announcements in real time.
 An initiative taken by the Star Track Developers in Kuala Lumpur to gain experience with [AngularJS](https://angularjs.org/) and [MongoDB](http://www.mongodb.org/).
 
 ## Badges
-Badges being displayed in this README is pointing to [develop](https://github.com/StarTrackDevKL/announcement-board/tree/develop).
+Badges in this README are pointing to [develop](https://github.com/StarTrackDevKL/announcement-board/tree/develop).
 
 ## Components
 We are using several open source components:
