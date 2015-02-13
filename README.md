@@ -1,4 +1,4 @@
-# Announcement Board [![Build Status](https://travis-ci.org/StarTrackDevKL/announcement-board.svg?branch=develop)](https://travis-ci.org/StarTrackDevKL/announcement-board) [![Coverage Status](https://coveralls.io/repos/StarTrackDevKL/announcement-board/badge.svg)](https://coveralls.io/r/StarTrackDevKL/announcement-board)
+# Announcement Board [![Build Status](https://travis-ci.org/StarTrackDevKL/announcement-board.svg?branch=develop)](https://travis-ci.org/StarTrackDevKL/announcement-board) [![Coverage Status](https://coveralls.io/repos/StarTrackDevKL/announcement-board/badge.svg?branch=develop)](https://coveralls.io/r/StarTrackDevKL/announcement-board?branch=develop)
 Utilises on web socket
 
 ## Building the Project
