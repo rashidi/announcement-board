@@ -16,4 +16,6 @@ public interface UserRepository extends MongoRepository<User, String> {
     User findOneByUsernameIgnoreCaseAndPassword(String username, String password);
 
     Page<User> findAllByStatus(UserStatus status, Pageable pageable);
+
+    Page<User> findAllByNameContainsIgnoreCase(String name, Pageable pageable);
 }

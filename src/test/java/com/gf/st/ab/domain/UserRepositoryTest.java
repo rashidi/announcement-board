@@ -24,6 +24,7 @@ public class UserRepositoryTest extends AnnouncementBoardApplicationTests {
 
     private String id;
     private User user = new User("mohdrashidi.mohdzin@gfk.com", "rashidi.zin", "50m3r4n80m945$W0r8");
+    private final Pageable pageable = new PageRequest(0, 100);
 
     @Before
     public void init() {
@@ -78,10 +79,28 @@ public class UserRepositoryTest extends AnnouncementBoardApplicationTests {
 
     @Test
     public void findAllByStatus() {
-        Pageable pageable = new PageRequest(0, 100);
-
         assertTrue($.findAllByStatus(ACTIVE, pageable).hasContent());
         assertFalse($.findAllByStatus(DORMANT, pageable).hasContent());
+    }
+
+    @Test
+    public void findAllByNameContainsIgnoreCase() {
+        user.setName("Rashidi Zin");
+
+        $.save(user);
+
+        assertTrue(
+                $.findAllByNameContainsIgnoreCase(user.getName(), pageable)
+                        .hasContent()
+        );
+        assertTrue(
+                $.findAllByNameContainsIgnoreCase(user.getName().toUpperCase(), pageable)
+                        .hasContent()
+        );
+        assertTrue(
+                $.findAllByNameContainsIgnoreCase(user.getName().substring(2, 7), pageable)
+                        .hasContent()
+        );
     }
 
     private void createForFailure(String email, String username, String password, String expectedErrorMessage) {
