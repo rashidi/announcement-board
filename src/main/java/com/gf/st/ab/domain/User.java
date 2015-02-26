@@ -19,7 +19,7 @@ public class User {
     @Id
     private String id;
 
-    @Pattern(regexp = "^[\\\\p{L} .'-]+$", message = "invalid name format")
+    @Pattern(regexp = "^[\\p{L} .'-]+$", message = "invalid name format")
     private String name;
 
     @NotEmpty(message = "username is required")
