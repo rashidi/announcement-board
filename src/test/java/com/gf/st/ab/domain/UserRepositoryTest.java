@@ -103,6 +103,17 @@ public class UserRepositoryTest extends AnnouncementBoardApplicationTests {
         );
     }
 
+    @Test
+    public void findAllByUsernameContainsIgnoreCase() {
+        assertTrue(
+                $.findAllByUsernameContainsIgnoreCase(user.getUsername().toUpperCase(), pageable)
+                        .hasContent()
+        );
+        assertTrue(
+                $.findAllByUsernameContainsIgnoreCase(user.getUsername().substring(0, 7), pageable).hasContent()
+        );
+    }
+
     private void createForFailure(String email, String username, String password, String expectedErrorMessage) {
         try {
             $.save(

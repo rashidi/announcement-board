@@ -18,4 +18,6 @@ public interface UserRepository extends MongoRepository<User, String> {
     Page<User> findAllByStatus(UserStatus status, Pageable pageable);
 
     Page<User> findAllByNameContainsIgnoreCase(String name, Pageable pageable);
+
+    Page<User> findAllByUsernameContainsIgnoreCase(String username, Pageable pageable);
 }
