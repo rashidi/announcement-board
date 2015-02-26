@@ -13,6 +13,8 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     User findOneByEmailIgnoreCaseAndPassword(String email, String password);
 
+    User findOneByUsernameIgnoreCase(String username);
+
     User findOneByUsernameIgnoreCaseAndPassword(String username, String password);
 
     Page<User> findAllByStatus(UserStatus status, Pageable pageable);
@@ -20,4 +22,5 @@ public interface UserRepository extends MongoRepository<User, String> {
     Page<User> findAllByNameContainsIgnoreCase(String name, Pageable pageable);
 
     Page<User> findAllByUsernameContainsIgnoreCase(String username, Pageable pageable);
+
 }

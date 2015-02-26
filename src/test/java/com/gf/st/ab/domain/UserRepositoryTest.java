@@ -114,6 +114,13 @@ public class UserRepositoryTest extends AnnouncementBoardApplicationTests {
         );
     }
 
+    @Test
+    public void findOneByUsernameIgnoreCase() {
+        assertNotNull(
+                $.findOneByUsernameIgnoreCase(user.getUsername())
+        );
+    }
+
     private void createForFailure(String email, String username, String password, String expectedErrorMessage) {
         try {
             $.save(
