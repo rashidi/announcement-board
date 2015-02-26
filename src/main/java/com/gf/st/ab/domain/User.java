@@ -1,7 +1,6 @@
 package com.gf.st.ab.domain;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -32,7 +31,10 @@ public class User {
     @Email(regexp = ".+@.+\\..+", message = "email address is invalid")
     private String email;
 
+    private Date updated;
+
     private Date created = new Date();
+
 
     private UserStatus status = ACTIVE;
 
@@ -99,5 +101,13 @@ public class User {
 
     public void setStatus(UserStatus status) {
         this.status = status;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 }
