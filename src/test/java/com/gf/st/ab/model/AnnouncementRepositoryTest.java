@@ -1,6 +1,6 @@
 package com.gf.st.ab.model;
 
-import com.gf.st.ab.AnnouncementBoardApplicationTests;
+import com.gf.st.ab.AbstractTests;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * @author Rashidi Zin
  */
-public class AnnouncementRepositoryTest extends AnnouncementBoardApplicationTests {
+public class AnnouncementRepositoryTest extends AbstractTests {
 
     @Autowired
     AnnouncementRepository $;
