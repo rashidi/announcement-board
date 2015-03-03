@@ -38,6 +38,12 @@ public class UserService {
         repository.delete(user);
     }
 
+    public User authenticate(String username, String password) {
+        if (isEmpty(username) || isEmpty(password)) { throw new IllegalArgumentException("username and password are required"); }
+
+        return repository.findOneByUsernameIgnoreCaseAndPassword(username, password);
+    }
+
     private boolean exists(User user) {
         return repository.findOneByEmailIgnoreCase(user.getEmail()) != null || repository.findOneByUsernameIgnoreCase(user.getUsername()) != null;
     }

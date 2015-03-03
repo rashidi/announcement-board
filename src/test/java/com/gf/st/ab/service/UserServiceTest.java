@@ -92,4 +92,31 @@ public class UserServiceTest extends AbstractMockTests {
         verify(repository).findOne(user.getId());
         verify(repository, times(0)).delete(any(User.class));
     }
+
+    @Test
+    public void authenticate() {
+        $.authenticate(user.getUsername(), user.getPassword());
+
+        verify(repository).findOneByUsernameIgnoreCaseAndPassword(user.getUsername(), user.getPassword());
+    }
+
+    @Test
+    public void authenticateWithoutUsername() {
+        expect.expect(IllegalArgumentException.class);
+        expect.expectMessage("username and password are required");
+
+        $.authenticate(null, user.getPassword());
+
+        verify(repository, times(0)).findOneByUsernameIgnoreCaseAndPassword(null, user.getPassword());
+    }
+
+    @Test
+    public void authenticateWithoutPassword() {
+        expect.expect(IllegalArgumentException.class);
+        expect.expectMessage("username and password are required");
+
+        $.authenticate(user.getUsername(), "");
+
+        verify(repository, times(0)).findOneByUsernameIgnoreCaseAndPassword(user.getUsername(), "");
+    }
 }
