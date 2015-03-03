@@ -1,16 +1,15 @@
 package com.gf.st.ab.service;
 
-import com.gf.st.ab.domain.User;
-import com.gf.st.ab.domain.UserRepository;
-import org.hibernate.validator.internal.constraintvalidators.EmailValidator;
+import com.gf.st.ab.domain.Authorization;
+import com.gf.st.ab.domain.AuthorizationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import static org.springframework.security.core.authority.AuthorityUtils.commaSeparatedStringToAuthorityList;
-import static org.springframework.util.StringUtils.isEmpty;
 
 /**
  * @author Rashidi Zin
@@ -19,24 +18,14 @@ import static org.springframework.util.StringUtils.isEmpty;
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    UserRepository userRepository;
+    AuthorizationRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user;
-        EmailValidator emailValidator = new EmailValidator();
+        Authorization token = repository.findOne(username);
 
-        if (isEmpty(username)) { throw new IllegalArgumentException("username is required"); }
+        if (token == null) { throw new UsernameNotFoundException("invalid username"); }
 
-        if (emailValidator.isValid(username, null)) { user = userRepository.findOneByEmailIgnoreCase(username); }
-
-        else { user = userRepository.findOneByUsernameIgnoreCase(username); }
-
-        if (user == null) { throw new UsernameNotFoundException("invalid username"); }
-
-        return new org.springframework.security.core.userdetails.User(
-                username, user.getPassword(),
-                commaSeparatedStringToAuthorityList("ROLE_USER")
-        );
+        return new User(token.getUsername(), token.getToken(), commaSeparatedStringToAuthorityList("ROLE_USER"));
     }
 }

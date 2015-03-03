@@ -1,14 +1,15 @@
 package com.gf.st.ab.service;
 
 import com.gf.st.ab.AbstractMockTests;
-import com.gf.st.ab.domain.User;
-import com.gf.st.ab.domain.UserRepository;
+import com.gf.st.ab.domain.Authorization;
+import com.gf.st.ab.domain.AuthorizationRepository;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 /**
  * @author Rashidi Zin
@@ -16,58 +17,41 @@ import static org.mockito.Mockito.*;
 public class UserDetailsServiceImplTest extends AbstractMockTests {
 
     @Mock
-    UserRepository userRepository;
+    AuthorizationRepository repository;
 
     @InjectMocks
     UserDetailsServiceImpl $;
 
-    private User user = new User("zues@greek.com", "zeus", "th3m!GH7yZ3u5");
-
-    @Test
-    public void usernameIsNull() {
-        expect.expect(IllegalArgumentException.class);
-        expect.expectMessage("username is required");
-
-        $.loadUserByUsername(null);
-    }
+    private Authorization authorization = new Authorization("zeus", "th3m!GH7yZ3u5");
 
     @Test
     public void usernameIsEmpty() {
-        expect.expect(IllegalArgumentException.class);
-        expect.expectMessage("username is required");
+        expect.expect(UsernameNotFoundException.class);
+        expect.expectMessage("invalid username");
 
         $.loadUserByUsername("");
     }
 
     @Test
-    public void loginWithUsername() {
-        when(userRepository.findOneByUsernameIgnoreCase(user.getUsername())).thenReturn(user);
+    public void loadUserByUsername() {
+        when(repository.findOne(authorization.getUsername())).thenReturn(authorization);
 
-        $.loadUserByUsername(user.getUsername());
+        $.loadUserByUsername(authorization.getUsername());
 
-        verify(userRepository).findOneByUsernameIgnoreCase(user.getUsername());
+        verify(repository).findOne(authorization.getUsername());
     }
 
     @Test
-    public void loginWithEmail() {
-        when(userRepository.findOneByEmailIgnoreCase(user.getEmail())).thenReturn(user);
-
-        $.loadUserByUsername(user.getEmail());
-
-        verify(userRepository).findOneByEmailIgnoreCase(user.getEmail());
-    }
-
-    @Test
-    public void loginWithNotExistingAccount() {
+    public void loadWithNotExistingAccount() {
         expect.expect(UsernameNotFoundException.class);
         expect.expectMessage("invalid username");
 
         final String username = "Hercules";
 
-        when(userRepository.findOneByUsernameIgnoreCase(username)).thenReturn(null);
+        when(repository.findOne(username)).thenReturn(null);
 
         $.loadUserByUsername(username);
 
-        verify(userRepository).findOneByEmailIgnoreCase(username);
+        verify(repository).findOne(username);
     }
 }
