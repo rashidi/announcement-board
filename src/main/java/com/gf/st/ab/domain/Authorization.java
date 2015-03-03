@@ -14,6 +14,9 @@ public class Authorization {
 
     private String token;
 
+    public Authorization() {
+    }
+
     public Authorization(String username, String token) {
         this.username = username;
         this.token = token;
