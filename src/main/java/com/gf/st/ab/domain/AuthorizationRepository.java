@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 /**
  * @author Rashidi Zin
  */
-public interface UserTokenRepository extends MongoRepository<UserToken, String> {
+public interface AuthorizationRepository extends MongoRepository<Authorization, String> {
 
 
 }

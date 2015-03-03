@@ -7,14 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
  * @author Rashidi Zin
  */
 @Document
-public class UserToken {
+public class Authorization {
 
     @Id
     private String username;
 
     private String token;
 
-    public UserToken(String username, String token) {
+    public Authorization(String username, String token) {
         this.username = username;
         this.token = token;
     }

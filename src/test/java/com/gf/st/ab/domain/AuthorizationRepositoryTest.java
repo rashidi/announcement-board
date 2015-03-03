@@ -11,12 +11,12 @@ import static org.junit.Assert.*;
 /**
  * @author Rashidi Zin
  */
-public class UserTokenRepositoryTest extends AnnouncementBoardApplicationTests {
+public class AuthorizationRepositoryTest extends AnnouncementBoardApplicationTests {
 
     @Autowired
-    UserTokenRepository $;
+    AuthorizationRepository $;
 
-    UserToken token = new UserToken("gremlins", "Z3JlbWxpbnMgYXJlIHByZXR0eQ==");
+    Authorization token = new Authorization("gremlins", "Z3JlbWxpbnMgYXJlIHByZXR0eQ==");
 
     @Before
     public void init() {
