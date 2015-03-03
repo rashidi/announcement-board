@@ -2,13 +2,13 @@ import org.apache.tools.ant.filters.*
 
 buildscript {
     ext {
-        springPlatformVersion = '1.1.1.RELEASE'
+        springBootVersion = '1.2.2.RELEASE'
     }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath('io.spring.gradle:dependency-management-plugin:0.3.0.RELEASE')
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath('net.saliman:gradle-cobertura-plugin:2.0.0')
         classpath('org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.3.1')
     }
@@ -17,7 +17,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'idea'
-apply plugin: 'io.spring.dependency-management'
+apply plugin: 'spring-boot'
 apply plugin: 'war'
 apply plugin: 'cobertura'
 apply plugin: 'com.github.kt3k.coveralls'
@@ -46,12 +46,6 @@ dependencies {
     compile("org.hibernate:hibernate-validator")
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
     testCompile("org.springframework.boot:spring-boot-starter-test")
-}
-
-dependencyManagement {
-    imports {
-        mavenBom "io.spring.platform:platform-bom:${springPlatformVersion}"
-    }
 }
 
 eclipse {
