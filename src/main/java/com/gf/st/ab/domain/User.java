@@ -35,7 +35,6 @@ public class User {
 
     private Date created = new Date();
 
-
     private UserStatus status = ACTIVE;
 
     public User() {
