@@ -7,20 +7,20 @@ module.exports = function(config){
       'src/main/resources/static/bower_components/angular/angular.js',
       'src/main/resources/static/bower_components/angular-route/angular-route.js',
       'src/main/resources/static/bower_components/angular-mocks/angular-mocks.js',
-      'src/main/resources/static/components/**/*.js',
-      'src/main/resources/static/view*/**/*.js'
+      'src/main/resources/static/bower_components/angular-resource/angular-resource.js',
+      'src/main/resources/static/js/**/*.js',
+      'src/test/resources/static/spec/**/*.js'
     ],
 
     autoWatch : true,
 
     frameworks: ['jasmine'],
 
-    browsers : ['Chrome'],
+    browsers: ['PhantomJS'],
 
     plugins : [
-            'karma-chrome-launcher',
-            'karma-firefox-launcher',
             'karma-jasmine',
+            'karma-phantomjs-launcher',
             'karma-junit-reporter'
             ],
 
