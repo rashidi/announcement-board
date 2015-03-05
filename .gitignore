@@ -1,5 +1,6 @@
 .gradle
 .idea
 build
-announcement-board.iml
+*.iml
 src/main/resources/static/bower_components
+node_modules/*
