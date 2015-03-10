@@ -1,5 +1,6 @@
 package com.gf.st.ab;
 
+import com.gf.st.ab.domain.Announcement;
 import com.gf.st.ab.domain.Authorization;
 import com.gf.st.ab.domain.User;
 import org.junit.After;
@@ -28,6 +29,7 @@ public class AnnouncementBoardApplicationTests extends AbstractTests {
 	private Authorization authorization;
 
 	private User user = new User("morpheus@nebuchadnezzar.com", "morpheus", "ey3|348th31");
+	private Announcement announcement = new Announcement("Let It Go", "You have to let it all go, Neo. Fear, doubt, and disbelief. Free your mind.");
 
 	@Before
 	public void init() {
@@ -37,6 +39,8 @@ public class AnnouncementBoardApplicationTests extends AbstractTests {
 		authorize();
 
 		restTemplate = new TestRestTemplate(authorization.getUsername(), authorization.getToken());
+
+		createAnnouncement();
 	}
 
 	@Test
@@ -55,8 +59,20 @@ public class AnnouncementBoardApplicationTests extends AbstractTests {
 		assertEquals(NOT_FOUND, response.getStatusCode());
 	}
 
+	@Test
+	public void getAnnouncement() {
+		ResponseEntity<Announcement> response = restTemplate.getForEntity(String.format("%s/announcements/%s", url, announcement.getId()), Announcement.class);
+
+		assertEquals(OK, response.getStatusCode());
+		assertEquals(announcement.getTitle(), response.getBody().getTitle());
+		assertEquals(announcement.getContent(), response.getBody().getContent());
+		assertEquals(user.getId(), response.getBody().getUserId());
+		assertEquals(user.getUsername(), response.getBody().getUsername());
+	}
+
 	@After
 	public void delete() {
+		deleteAnnouncement();
 		deleteUser();
 		logout();
 	}
@@ -95,5 +111,23 @@ public class AnnouncementBoardApplicationTests extends AbstractTests {
 		ResponseEntity response = restTemplate.postForEntity(url + "/authorization/logout", null, Authorization.class);
 
 		assertEquals(OK, response.getStatusCode());
+	}
+
+	private void createAnnouncement() {
+		ResponseEntity<Announcement> response = restTemplate.postForEntity(url + "/announcements", announcement, Announcement.class);
+
+		assertEquals(CREATED, response.getStatusCode());
+
+		announcement = response.getBody();
+	}
+
+	private void deleteAnnouncement() {
+		String announcementUrl = String.format("%s/announcements/%s", url, announcement.getId());
+
+		restTemplate.delete(announcementUrl);
+
+		ResponseEntity<Announcement> response = restTemplate.getForEntity(announcementUrl, Announcement.class);
+
+		assertEquals(NOT_FOUND, response.getStatusCode());
 	}
 }
