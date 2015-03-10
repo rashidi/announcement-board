@@ -30,6 +30,11 @@ public class Announcement {
     public Announcement() {
     }
 
+    public Announcement(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
+
     public Announcement(String title, String content, String userId, String username) {
         this.title = title;
         this.content = content;
