@@ -80,6 +80,15 @@ public class AnnouncementServiceTest extends AbstractMockTests {
     }
 
     @Test
+    public void getAll() {
+        when(repository.findAll(pageable)).thenReturn(searchResult);
+
+        $.getAll(pageable);
+
+        verify(repository).findAll(pageable);
+    }
+
+    @Test
     public void searchByUserId() {
         when(repository.findAllByUserId(user.getId(), pageable)).thenReturn(searchResult);
 

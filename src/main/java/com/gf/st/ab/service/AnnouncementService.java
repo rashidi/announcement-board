@@ -42,6 +42,10 @@ public class AnnouncementService {
         return repository.findOne(id);
     }
 
+    public Page<Announcement> getAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
     public Page<Announcement> search(String title, String content, String userId, String username, Pageable pageable) {
 
         if (StringUtils.hasText(userId)) { return repository.findAllByUserId(userId, pageable); }
