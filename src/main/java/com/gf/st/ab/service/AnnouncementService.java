@@ -58,4 +58,8 @@ public class AnnouncementService {
 
         return new PageImpl<Announcement>(new ArrayList<Announcement>());
     }
+
+    public void delete(Announcement announcement) {
+        repository.delete(announcement);
+    }
 }

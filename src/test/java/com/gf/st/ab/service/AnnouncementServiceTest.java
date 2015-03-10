@@ -145,4 +145,11 @@ public class AnnouncementServiceTest extends AbstractMockTests {
         verify(repository, times(0)).findAllByTitleContainsIgnoreCase(announcement.getTitle(), pageable);
         verify(repository, times(0)).findAllByContentContainsIgnoreCase(announcement.getContent(), pageable);
     }
+
+    @Test
+    public void delete() {
+        $.delete(announcement);
+
+        verify(repository).delete(announcement);
+    }
 }
