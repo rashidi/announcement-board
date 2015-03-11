@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -32,6 +34,8 @@ public class AnnouncementController {
     AnnouncementService service;
 
     @RequestMapping(method = {POST, PUT})
+    @MessageMapping("/announce")
+    @SendTo("/announcements")
     public ResponseEntity<Announcement> create(@RequestBody Announcement announcement) {
         User loggedInUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
