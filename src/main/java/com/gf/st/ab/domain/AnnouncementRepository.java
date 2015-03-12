@@ -4,6 +4,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.Date;
+
 /**
  * @author Rashidi Zin
  */
@@ -16,4 +18,6 @@ public interface AnnouncementRepository extends MongoRepository<Announcement, St
     Page<Announcement> findAllByTitleContainsIgnoreCase(String title, Pageable pageable);
 
     Page<Announcement> findAllByContentContainsIgnoreCase(String content, Pageable pageable);
+
+    Page<Announcement> findAllByCreatedAfter(Date created, Pageable pageable);
 }

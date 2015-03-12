@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.springframework.util.Assert.hasLength;
 
@@ -46,7 +47,7 @@ public class AnnouncementService {
         return repository.findAll(pageable);
     }
 
-    public Page<Announcement> search(String title, String content, String userId, String username, Pageable pageable) {
+    public Page<Announcement> search(String title, String content, String userId, String username, Date created, Pageable pageable) {
 
         if (StringUtils.hasText(userId)) { return repository.findAllByUserId(userId, pageable); }
 
@@ -55,6 +56,8 @@ public class AnnouncementService {
         else if (StringUtils.hasText(title)) { return repository.findAllByTitleContainsIgnoreCase(title, pageable); }
 
         else if (StringUtils.hasText(content)) { return repository.findAllByContentContainsIgnoreCase(content, pageable); }
+
+        else if (created != null) { return repository.findAllByCreatedAfter(created, pageable); }
 
         return new PageImpl<Announcement>(new ArrayList<Announcement>());
     }
