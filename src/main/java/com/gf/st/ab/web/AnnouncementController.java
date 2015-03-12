@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -15,6 +16,8 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
 
 import static org.springframework.http.HttpStatus.*;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
@@ -71,11 +74,12 @@ public class AnnouncementController {
     @RequestMapping(value = "search", method = GET)
     public ResponseEntity<Page<Announcement>> getWithCriteria(@RequestParam(value = "title", required = false) String title, @RequestParam(value = "content", required = false) String content,
                                                               @RequestParam(value = "userId", required = false) String userId, @RequestParam(value = "username", required = false) String username,
+                                                              @RequestParam(value = "created", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) Date created,
                                                               @RequestParam(value = "page", required = false, defaultValue = "0") int page, @RequestParam(value = "size", required = false, defaultValue = "25") int size) {
 
         Pageable pageable = new PageRequest(page, size, Sort.Direction.DESC, "created");
 
-        return new ResponseEntity<Page<Announcement>>(service.search(title, content, userId, username, pageable), OK);
+        return new ResponseEntity<Page<Announcement>>(service.search(title, content, userId, username, created, pageable), OK);
     }
 
     @RequestMapping(value = "{id}", method = DELETE)

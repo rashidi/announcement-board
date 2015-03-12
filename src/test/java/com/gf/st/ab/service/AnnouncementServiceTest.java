@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
@@ -92,7 +93,7 @@ public class AnnouncementServiceTest extends AbstractMockTests {
     public void searchByUserId() {
         when(repository.findAllByUserId(user.getId(), pageable)).thenReturn(searchResult);
 
-        $.search(null, null, user.getId(), null, pageable);
+        $.search(null, null, user.getId(), null, null, pageable);
 
         verify(repository).findAllByUserId(user.getId(), pageable);
         verify(repository, times(0)).findAllByUsername(user.getUsername(), pageable);
@@ -104,7 +105,7 @@ public class AnnouncementServiceTest extends AbstractMockTests {
     public void searchByUserName() {
         when(repository.findAllByUsername(user.getUsername(), pageable)).thenReturn(searchResult);
 
-        $.search(null, null, null, user.getUsername(), pageable);
+        $.search(null, null, null, user.getUsername(), null, pageable);
 
         verify(repository).findAllByUsername(user.getUsername(), pageable);
         verify(repository, times(0)).findAllByUserId(user.getId(), pageable);
@@ -116,7 +117,7 @@ public class AnnouncementServiceTest extends AbstractMockTests {
     public void searchByTitle() {
         when(repository.findAllByTitleContainsIgnoreCase(announcement.getTitle(), pageable)).thenReturn(searchResult);
 
-        $.search(announcement.getTitle(), null, null, null, pageable);
+        $.search(announcement.getTitle(), null, null, null, null, pageable);
 
         verify(repository).findAllByTitleContainsIgnoreCase(announcement.getTitle(), pageable);
         verify(repository, times(0)).findAllByUsername(user.getUsername(), pageable);
@@ -128,7 +129,7 @@ public class AnnouncementServiceTest extends AbstractMockTests {
     public void searchByContent() {
         when(repository.findAllByContentContainsIgnoreCase(announcement.getTitle(), pageable)).thenReturn(searchResult);
 
-        $.search(null, announcement.getContent(), null, null, pageable);
+        $.search(null, announcement.getContent(), null, null, null, pageable);
 
         verify(repository).findAllByContentContainsIgnoreCase(announcement.getContent(), pageable);
         verify(repository, times(0)).findAllByUserId(user.getId(), pageable);
@@ -138,8 +139,23 @@ public class AnnouncementServiceTest extends AbstractMockTests {
 
     @Test
     public void searchWithoutParameter() {
-        $.search(null, null, null, null, pageable);
+        $.search(null, null, null, null, null, pageable);
 
+        verify(repository, times(0)).findAllByUserId(user.getId(), pageable);
+        verify(repository, times(0)).findAllByUsername(user.getUsername(), pageable);
+        verify(repository, times(0)).findAllByTitleContainsIgnoreCase(announcement.getTitle(), pageable);
+        verify(repository, times(0)).findAllByContentContainsIgnoreCase(announcement.getContent(), pageable);
+    }
+
+    @Test
+    public void searchByCreated() {
+        Date created = new Date();
+
+        when(repository.findAllByCreatedAfter(created, pageable)).thenReturn(searchResult);
+
+        $.search(null, null, null, null, created, pageable);
+
+        verify(repository).findAllByCreatedAfter(created, pageable);
         verify(repository, times(0)).findAllByUserId(user.getId(), pageable);
         verify(repository, times(0)).findAllByUsername(user.getUsername(), pageable);
         verify(repository, times(0)).findAllByTitleContainsIgnoreCase(announcement.getTitle(), pageable);

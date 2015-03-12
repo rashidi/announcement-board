@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -60,9 +64,34 @@ public class AnnouncementRepositoryTest extends AbstractTests {
         );
     }
 
+    @Test
+    public void findAllByCreatedAfter() {
+        assertFalse(
+                $.findAllByCreatedAfter(announcement.getCreated(), pageable).hasContent()
+        );
+
+        Announcement persisted = $.findOne(announcement.getId());
+        Date futureDate = getFutureDate(persisted.getCreated(), 2);
+
+        persisted.setCreated(futureDate);
+        $.save(persisted);
+
+        assertTrue(
+                $.findAllByCreatedAfter(announcement.getCreated(), pageable).hasContent()
+        );
+    }
+
     @After
     public void delete() {
         $.delete(announcement);
         userRepository.delete(user);
+    }
+
+    private Date getFutureDate(Date date, int amountOfDays) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, amountOfDays);
+
+        return calendar.getTime();
     }
 }
