@@ -15,12 +15,12 @@ public class AnnouncementWebSocketMessageBrokerConfigurer extends AbstractWebSoc
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/announce").withSockJS();
+        registry.addEndpoint("/websocket/tracker").withSockJS();
     }
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/announcements");
+        registry.enableSimpleBroker("/topic");
         registry.setApplicationDestinationPrefixes("/app");
     }
 }
