@@ -25,6 +25,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 war {
     baseName = 'announcement-board'
     version = '0.0.1-SNAPSHOT'
+    archiveName = 'announcement-board.war'
 }
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
