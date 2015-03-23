@@ -7,5 +7,5 @@ module.config(function($mdThemingProvider) {
         .primaryPalette('deep-orange');
 });
 
-module.controller('ApplicationCtrl', ['$scope', function($scope) {
+module.controller('HeaderCtrl', ['$scope', function($scope) {
 }]);
