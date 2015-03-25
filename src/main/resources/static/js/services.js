@@ -2,7 +2,7 @@
 
 var module = angular.module('announcementBoardServices', ['ngResource']);
 
-module.factory('RESTService', ['$resource', function($resource) {
+module.factory('UserService', ['$resource', function($resource) {
 
     return {
         login: function(username, password) {
@@ -20,4 +20,12 @@ module.factory('RESTService', ['$resource', function($resource) {
             });
         }
     }
+}]);
+
+module.factory('AuthorizationService', ['$resource', function($resource) {
+
+}]);
+
+module.factory('AnnouncementService', ['$resource', function($resource) {
+
 }]);
