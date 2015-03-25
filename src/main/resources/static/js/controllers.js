@@ -9,3 +9,12 @@ module.config(function($mdThemingProvider) {
 
 module.controller('HeaderCtrl', ['$scope', function($scope) {
 }]);
+
+module.controller('UserCtrl', ['$scope', function($scope) {
+}]);
+
+module.controller('AuthorizationCtrl', ['$scope', function($scope) {
+}]);
+
+module.controller('AnnouncementCtrl', ['$scope', function($scope) {
+}]);
