@@ -1,11 +1,11 @@
     <md-content class="md-padding" style="font-size:1.2em" flex>
         <h2>Sign Up</h2>
-        <form name="profileForm" ng-submit="submitNewSignUp(user)" >
+        <form name="signupForm" ng-submit="submitNewSignUp(user)" >
 
             <md-input-container>
                 <label>Your Full Name</label>
                 <input md-maxlength="50" required name="fullname" ng-model="user.fullname" value="Khoo">
-                <div ng-messages="profileForm.fullname.$error">
+                <div ng-messages="signupForm.fullname.$error">
                     <div ng-message="required">Full Name is required.</div>
                     <div ng-message="md-maxlength">The Full Name has to be less than 50 characters long.</div>
                 </div>
@@ -15,7 +15,7 @@
                 <md-input-container flex>
                     <label>Your User Name</label>
                     <input md-maxlength="12" required name="username" ng-model="user.username" value="whkhoo">
-                    <div ng-messages="profileForm.username.$error">
+                    <div ng-messages="signupForm.username.$error">
                         <div ng-message="required">User Name is required.</div>
                         <div ng-message="md-maxlength">The User Name has to be less than 12 characters long.</div>
                     </div>
@@ -23,7 +23,7 @@
                 <md-input-container flex>
                     <label>Your Password</label>
                     <input md-maxlength="12" type="password" required name="password" ng-model="user.password" value="khoo">
-                    <div ng-messages="profileForm.password.$error">
+                    <div ng-messages="signupForm.password.$error">
                         <div ng-message="required">Password is required.</div>
                         <div ng-message="md-maxlength">The Password has to be less than 12 characters long.</div>
                     </div>
@@ -33,7 +33,7 @@
             <md-input-container>
                 <label>Your Email Address</label>
                 <input md-maxlength="50" type="email" required name="email" ng-model="user.email" value="WeiHiong.Khoo@gfk.com">
-                <div ng-messages="profileForm.email.$error">
+                <div ng-messages="signupForm.email.$error">
                     <div ng-message="required">Email Address is required.</div>
                     <div ng-message="md-maxlength">The Email Address has to be less than 50 characters long.</div>
                     <div ng-message="email">Email Address is invalid.</div>
