@@ -14,12 +14,16 @@ module.controller('SignupCtrl', ['$scope', '$mdToast', 'SignupService', function
 
       $scope.submitNewSignUp = function(user) {
          SignupService.signup(user).$promise.then(function(response) {
-             if(response.value == 409)
-                 $scope.showSimpleToast('Username / Email Address you entered is available!');
-             else
-                 $scope.showSimpleToast('New user is successfully registered!');
-                 user = {};
-                 $('#container form').get(0).reset();
+             if(response == undefined) {
+                $scope.showSimpleToast('There is an ERROR! You are not registered!');
+             } else {
+                 if(response.value == 409)
+                     $scope.showSimpleToast('Username / Email Address you entered is available!');
+                 else
+                     $scope.showSimpleToast('You are successfully registered as new user!');
+                     user = {};
+                     $('#container form').get(0).reset();
+             }
 
          });
       };
