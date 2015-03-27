@@ -8,6 +8,8 @@ module.exports = function(config){
       'src/main/resources/static/bower_components/angular-route/angular-route.js',
       'src/main/resources/static/bower_components/angular-mocks/angular-mocks.js',
       'src/main/resources/static/bower_components/angular-resource/angular-resource.js',
+      'src/main/resources/static/bower_components/angular-material/angular-material.js',
+      'src/main/resources/static/bower_components/angular-messages/angular-messages.js',
       'src/main/resources/static/js/**/*.js',
       'src/test/resources/static/spec/**/*.js'
     ],
