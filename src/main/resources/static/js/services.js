@@ -11,21 +11,5 @@ module.factory('UserService', ['$resource', function($resource) {
                 password: password
             });
         }
-        signup: function(userdata) {
-            return $resource('./users').save({
-                name: userdata.fullname,
-                username: userdata.username,
-                password: userdata.password,
-                email: userdata.email
-            });
-        }
     }
-}]);
-
-module.factory('AuthorizationService', ['$resource', function($resource) {
-
-}]);
-
-module.factory('AnnouncementService', ['$resource', function($resource) {
-
 }]);
