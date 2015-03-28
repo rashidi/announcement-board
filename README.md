@@ -1,4 +1,10 @@
-# Announcement Board [![Build Status](https://travis-ci.org/StarTrackDevKL/announcement-board.svg?branch=develop)](https://travis-ci.org/StarTrackDevKL/announcement-board) [![Coverage Status](https://coveralls.io/repos/StarTrackDevKL/announcement-board/badge.svg?branch=develop)](https://coveralls.io/r/StarTrackDevKL/announcement-board?branch=develop)
+# Announcement Board 
+
+[![Build Status](https://travis-ci.org/StarTrackDevKL/announcement-board.svg?branch=develop)](https://travis-ci.org/StarTrackDevKL/announcement-board) 
+[![Coverage Status](https://coveralls.io/repos/StarTrackDevKL/announcement-board/badge.svg?branch=develop)](https://coveralls.io/r/StarTrackDevKL/announcement-board?branch=develop)
+[![devDependency Status](https://david-dm.org/StarTrackDevKL/announcement-board/dev-status.svg?style=flat)](https://david-dm.org/StarTrackDevKL/announcement-board#info=devDependencies)
+___
+
 Send and receive announcements in real time.
 
 ## Background
