@@ -1,11 +1,15 @@
-# Announcement Board [![Build Status](https://travis-ci.org/StarTrackDevKL/announcement-board.svg?branch=develop)](https://travis-ci.org/StarTrackDevKL/announcement-board) [![Coverage Status](https://coveralls.io/repos/StarTrackDevKL/announcement-board/badge.svg?branch=develop)](https://coveralls.io/r/StarTrackDevKL/announcement-board?branch=develop)
+# Announcement Board 
 Send and receive announcements in real time.
 
 ## Background
 An initiative taken by the Star Track Developers in Kuala Lumpur to gain experience with [AngularJS](https://angularjs.org/) and [MongoDB](http://www.mongodb.org/).
 
 ## Badges
-Badges in this README are pointing to [develop](https://github.com/StarTrackDevKL/announcement-board/tree/develop).
+[![Build Status](https://travis-ci.org/StarTrackDevKL/announcement-board.svg?branch=develop)](https://travis-ci.org/StarTrackDevKL/announcement-board) 
+[![Coverage Status](https://coveralls.io/repos/StarTrackDevKL/announcement-board/badge.svg?branch=develop)](https://coveralls.io/r/StarTrackDevKL/announcement-board?branch=develop)
+[![devDependency Status](https://david-dm.org/StarTrackDevKL/announcement-board/dev-status.svg?style=flat)](https://david-dm.org/StarTrackDevKL/announcement-board#info=devDependencies)
+
+Badges in this README are pointing to [develop](https://github.com/StarTrackDevKL/announcement-board/tree/develop) except for *devDependencies* which points to current branch.
 
 ## Components
 We are using several open source components:
