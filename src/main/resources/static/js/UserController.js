@@ -17,15 +17,13 @@ module.controller('SignupCtrl', ['$scope', '$mdToast', 'SignupService', function
              if(response == undefined) {
                 $scope.showSimpleToast('There is an ERROR! You are not registered!');
              } else {
-                 if(response.value == 409){
-                     $scope.showSimpleToast('Username or Email Address you entered is available!');
-                 }else{
-                     $scope.showSimpleToast('You are successfully registered as new user!');
-                     angular.copy({}, user);
-                     $scope.signupForm.$setPristine();
-                 }
+                 $scope.showSimpleToast('You are successfully registered as new user!');
+                 angular.copy({}, user);
+                 $scope.signupForm.$setPristine();
              }
 
+         }).catch(function(error) {
+            $scope.showSimpleToast(error);
          });
       };
 }]);

@@ -17,13 +17,12 @@ module.controller('LoginCtrl', ['$scope', '$mdToast', 'LoginService', function($
              if(response == undefined) {
                 $scope.showSimpleToast('There is an ERROR! You are not authorized for login!');
              } else {
-                 if(response.value == 409)
-                     $scope.showSimpleToast('Username or Password you entered is available!');
-                 else
-                     $scope.showSimpleToast('You are successfully logged in!');
-                     angular.copy({}, auth);
+                $scope.showSimpleToast('You are successfully logged in!');
+                angular.copy({}, auth);
              }
 
+         }).catch(function(error) {
+           $scope.showSimpleToast(error);
          });
       };
 }]);
