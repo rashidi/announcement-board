@@ -1,0 +1,13 @@
+<form name="loginForm" ng-submit="submitUserLogin(auth)" >
+    <div layout layout-sm="column" layout-align="center center">
+        <md-input-container flex>
+            <label><span style="color:white">Username</span></label>
+            <input name="username" ng-model="auth.username" required>
+        </md-input-container>
+        <md-input-container flex>
+            <label><span style="color:white">Password</span></label>
+            <input type="password" name="password" ng-model="auth.password" required>
+        </md-input-container>
+        <md-button class="md-raised" style="width:20%;height:20%">Log In</md-button>
+    </div>
+</form>
