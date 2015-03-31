@@ -15,7 +15,9 @@ angular
   'ngMaterial',
   'ngMessages',
   'announcementBoardApp.UserController',
-  'announcementBoardApp.UserService'
+  'announcementBoardApp.UserService',
+  'announcementBoardApp.AuthorizationController',
+  'announcementBoardApp.AuthorizationService'
 ])
 .config(function ($routeProvider) {
   $routeProvider
