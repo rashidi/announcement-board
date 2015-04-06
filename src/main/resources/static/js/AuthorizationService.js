@@ -2,7 +2,8 @@
 
 var module = angular.module('announcementBoardApp.AuthorizationService', ['ngResource']);
 
-module.factory('LoginService', ['$resource', function($resource) {
+module.factory('Authorization', ['$resource', function($resource) {
+    var currentAuthorization = {};
 
     return {
         login: function(username, password) {
@@ -10,6 +11,12 @@ module.factory('LoginService', ['$resource', function($resource) {
                 username: username,
                 password: password
             });
+        },
+        setCurrentAuthorization: function(authorization) {
+          currentAuthorization = authorization;
+        },
+        getCurrentAuthorization: function() {
+            return currentAuthorization;
         }
-    }
+    };
 }]);
