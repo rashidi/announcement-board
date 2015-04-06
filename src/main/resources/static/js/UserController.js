@@ -2,7 +2,7 @@
 
 var module = angular.module('announcementBoardApp.UserController',[]);
 
-module.controller('SignupCtrl', ['$scope', '$mdToast', 'SignupService', function($scope, $mdToast, SignupService) {
+module.controller('SignupCtrl', ['$scope', '$location', '$mdToast', 'SignupService', function($scope, $location, $mdToast, SignupService) {
      $scope.showSimpleToast = function(content) {
          $mdToast.show(
            $mdToast.simple()
@@ -14,16 +14,19 @@ module.controller('SignupCtrl', ['$scope', '$mdToast', 'SignupService', function
 
       $scope.submitNewSignUp = function(user) {
          SignupService.signup(user).$promise.then(function(response) {
-             if(response == undefined) {
+             if(response === undefined) {
                 $scope.showSimpleToast('There is an ERROR! You are not registered!');
              } else {
+                 $scope.signupMessages = {usernameEmail: false};
                  $scope.showSimpleToast('You are successfully registered as new user!');
-                 angular.copy({}, user);
-                 $scope.signupForm.$setPristine();
+//                 angular.copy({}, user);
+                 $location.path('/');
              }
 
          }).catch(function(error) {
-            $scope.showSimpleToast(error);
+            if(error.status === 409 || error.status === 400){
+                $scope.signupMessages = {usernameEmail: true};
+            }
          });
       };
 }]);

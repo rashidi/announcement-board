@@ -1,23 +1,29 @@
     <md-content class="md-padding" style="font-size:1.2em" flex>
         <h2>Sign Up</h2>
+        <div ng-messages='signupMessages' style="color:red">
+            <div ng-message='usernameEmail'>Username or Email Address has already existed!</div>
+        </div>
+        <br>
         <form name="signupForm" ng-submit="submitNewSignUp(user)" >
 
             <md-input-container>
                 <label>Your Full Name</label>
-                <input md-maxlength="50" required name="fullname" ng-model="user.fullname">
+                <input md-maxlength="50" required name="fullname" ng-model="user.fullname" ng-pattern="/^[a-zA-Z\s]*$/">
                 <div ng-messages="signupForm.fullname.$error">
                     <div ng-message="required">Full Name is required.</div>
-                    <div ng-message="md-maxlength">The Full Name has to be less than 50 characters long.</div>
+                    <div ng-message="md-maxlength">Full Name has to be less than 50 characters long.</div>
+                    <div ng-message="pattern">Full Name must contain only alphabets</div>
                 </div>
             </md-input-container>
 
             <div layout layout-sm="column">
                 <md-input-container flex>
                     <label>Your User Name</label>
-                    <input md-maxlength="20" required name="username" ng-model="user.username">
+                    <input md-maxlength="20" required name="username" ng-model="user.username" ng-pattern="/^[a-zA-Z0-9\s]*$/">
                     <div ng-messages="signupForm.username.$error">
                         <div ng-message="required">User Name is required.</div>
-                        <div ng-message="md-maxlength">The User Name has to be less than 20 characters long.</div>
+                        <div ng-message="md-maxlength">User Name has to be less than 20 characters long.</div>
+                        <div ng-message="pattern">User Name must contain only alphanumerics</div>
                     </div>
                 </md-input-container>
                 <md-input-container flex>
@@ -25,7 +31,7 @@
                     <input md-maxlength="20" type="password" required name="password" ng-model="user.password">
                     <div ng-messages="signupForm.password.$error">
                         <div ng-message="required">Password is required.</div>
-                        <div ng-message="md-maxlength">The Password has to be less than 20 characters long.</div>
+                        <div ng-message="md-maxlength">Password has to be less than 20 characters long.</div>
                     </div>
                 </md-input-container>
             </div>
@@ -35,7 +41,7 @@
                 <input md-maxlength="50" type="email" required name="email" ng-model="user.email">
                 <div ng-messages="signupForm.email.$error">
                     <div ng-message="required">Email Address is required.</div>
-                    <div ng-message="md-maxlength">The Email Address has to be less than 50 characters long.</div>
+                    <div ng-message="md-maxlength">Email Address has to be less than 50 characters long.</div>
                     <div ng-message="email">Email Address is invalid.</div>
                 </div>
             </md-input-container>

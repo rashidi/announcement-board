@@ -13,5 +13,5 @@ module.factory('SignupService', ['$resource', function($resource) {
                 email: userdata.email
             });
         }
-    }
+    };
 }]);
