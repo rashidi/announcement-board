@@ -2,7 +2,7 @@
 
 var module = angular.module('announcementBoardApp.AuthorizationController',[]);
 
-module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'Scopes', 'Authorization', function($scope, $location, $mdToast, Scopes, Authorization) {
+module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Scopes', 'Authorization', function($scope, $location, $mdToast, store, Scopes, Authorization) {
 
      Scopes.store('LoginCtrl', $scope);
 
@@ -21,7 +21,7 @@ module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'Scopes', 'Au
                 $scope.showSimpleToast('There is an ERROR! You are not authorized for login!');
              } else {
                 $scope.loginMessages = {usernamePassword: false};
-                Authorization.setCurrentAuthorization(response.data);
+                store.set('authorization', {username: response.username, token: response.token});
                 $scope.showSimpleToast('You are successfully logged in!');
                 angular.copy({}, auth);
                 $scope.loggedIn = true;
@@ -34,4 +34,5 @@ module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'Scopes', 'Au
             }
          });
       };
+
 }]);
