@@ -1,6 +1,6 @@
 'use strict';
 
-var module = angular.module('announcementBoardApp', ['ngMaterial']);
+var module = angular.module('announcementBoardApp', []);
 
 module.config(function($mdThemingProvider) {
     $mdThemingProvider.theme('default')
