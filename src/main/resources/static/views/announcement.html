@@ -1,0 +1,15 @@
+<div ng-controller="TrackerController">
+    <form ng-submit="addAnnouncement()" name="announcementForm">
+        <input type="text" placeholder="Title of your announcement" ng-model="announcementTitle" />
+        <textarea ng-mode="announcement" placeholder="Say something very long"></textarea>
+        <button>Announce!</button>
+    </form>
+    <hr />
+    <p ng-repeat="announcement in announcements | orderBy: 'created':true">
+        <time>{{ announcement.created | date:'dd-MM-yyyy HH:mm' }}</time>
+        <span>announcement.username</span>
+        <span>announcement.title</span>
+        <span>announcement.content</span>
+    </p>
+</div>
+

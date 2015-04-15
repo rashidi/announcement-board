@@ -1,4 +1,8 @@
-angular.module('announcementBoardApp').controller('TrackerController', function($scope) {
+'use strict';
+
+var module = angular.module('announcementBoardApp.AnnouncementController',[]);
+
+module.controller('TrackerController', ['$scope', function($scope) {
     
     $scope.announcements = [];
     var socket = new SockJS("/announcement-board/websocket/tracker");
@@ -13,4 +17,4 @@ angular.module('announcementBoardApp').controller('TrackerController', function(
     function showAnnouncement(announcement) {
         console.log(announcement);
     };
-});
+}]);
