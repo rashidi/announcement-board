@@ -15,11 +15,13 @@ var app = angular.module('announcementBoardApp', [
   'ngRoute',
   'ngMaterial',
   'ngMessages',
+  'ngResource',
   'angular-storage',
   'announcementBoardApp.UserController',
   'announcementBoardApp.UserService',
   'announcementBoardApp.AuthorizationController',
-  'announcementBoardApp.AuthorizationService'
+  'announcementBoardApp.AuthorizationService',
+  'announcementBoardApp.AnnouncementController'
 ]);
 
 app.run(['$rootScope', function($rootScope) {
@@ -33,45 +35,6 @@ app.run(['$rootScope', function($rootScope) {
     });
     currentRequests = [];
   });
-
-}]);
-
-app.factory('authInterceptor', ['$q', '$rootScope', '$location', '$timeout', function($q, $rootScope, $location, $timeout) {
-
-  return{
-      request: function(config) {
-//          delete $rootScope.errorKey;
-          var currentAuthorization = null;//Authorization.getCurrentAuthorization();
-          var access_token = currentAuthorization ? currentAuthorization.token : null;
-
-          if (access_token) {
-              config.headers.authorization = access_token;
-          }
-
-        if(!/\.html/.test(config.url)) {
-            var defer = $q.defer();
-            currentRequests.push(defer);
-            config.timeout = defer.promise;
-        }
-
-          return config;
-      },
-      responseError: function(errorResponse) {
-        if (errorResponse.status === 401) {
-//            $rootScope.error = 'global.server_errors.unauthorized';
-            $timeout(function () {
-                $location.path('/');
-            }, 3000);
-        } else if(errorResponse.status !== 0) {
-//          $rootScope.showErrorMsg = true; // general error message
-//          $timeout(function() {
-//            $rootScope.showErrorMsg = false;
-//          }, 10000);
-        }
-
-        return $q.reject(errorResponse);
-      }
-  };
 
 }]);
 
@@ -98,11 +61,47 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
     .when('/announcement',
     {
       templateUrl: 'views/announcement.html',
-      controller: 'AnnouncementCtrl'
+      controller: 'TrackerController'
     })
     .otherwise({
       redirectTo: '/'
     });
 
-     $httpProvider.interceptors.push('authInterceptor');
+    $httpProvider.interceptors.push(['$q', '$rootScope', '$location', '$timeout', 'store', function($q, $rootScope, $location, $timeout, store) {
+        return{
+            request: function(config) {
+      //          delete $rootScope.errorKey;
+                var currentAuthorization = store.get('authorization');
+                var access_token = currentAuthorization ? currentAuthorization.token : null;
+
+                if (access_token) {
+                    config.headers.authorization = access_token;
+                }
+
+              if(!/\.html/.test(config.url)) {
+                  var defer = $q.defer();
+                  currentRequests.push(defer);
+                  config.timeout = defer.promise;
+              }
+
+                return config;
+            },
+            responseError: function(errorResponse) {
+              if (errorResponse.status === 401) {
+      //            $rootScope.error = 'global.server_errors.unauthorized';
+                  $timeout(function () {
+                      $location.path('/');
+                  }, 3000);
+              } else if(errorResponse.status !== 0) {
+      //          $rootScope.showErrorMsg = true; // general error message
+      //          $timeout(function() {
+      //            $rootScope.showErrorMsg = false;
+      //          }, 10000);
+              }
+
+              return $q.reject(errorResponse);
+            }
+        };
+    }]);
+
 }]);
