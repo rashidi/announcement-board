@@ -21,7 +21,7 @@ module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Sco
                 $scope.showSimpleToast('There is an ERROR! You are not authorized for login!');
              } else {
                 $scope.loginMessages = {usernamePassword: false};
-                store.set('authorization', {username: response.username, token: response.token});
+                store.set('authorization', "Basic "+ window.btoa(response.username +":"+ response.token));
                 $scope.showSimpleToast('You are successfully logged in!');
                 angular.copy({}, auth);
                 $scope.loggedIn = true;
