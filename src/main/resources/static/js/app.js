@@ -27,7 +27,7 @@ var app = angular.module('announcementBoardApp', [
 app.run(['$rootScope', function($rootScope) {
 
   /**
-   * Cancels pending requests
+   * Cancel pending requests
    */
   $rootScope.$on('$routeChangeSuccess', function() {
     angular.forEach(currentRequests, function(request) {
@@ -51,21 +51,22 @@ app.factory('Scopes', function () {
     };
 });
 
-app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpProvider) {
-  $routeProvider
-    .when('/',
-    {
-      templateUrl: 'views/signup.html',
-      controller: 'SignupCtrl'
-    })
-    .when('/announcement',
-    {
-      templateUrl: 'views/announcement.html',
-      controller: 'TrackerController'
-    })
-    .otherwise({
-      redirectTo: '/'
-    });
+app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', function ($routeProvider, $httpProvider, $mdThemingProvider) {
+
+    $routeProvider
+        .when('/',
+        {
+            templateUrl: 'views/signup.html',
+            controller: 'SignupCtrl'
+        })
+        .when('/announcement',
+        {
+            templateUrl: 'views/announcement.html',
+            controller: 'TrackerController'
+        })
+        .otherwise({
+            redirectTo: '/'
+        });
 
     $httpProvider.interceptors.push(['$q', '$rootScope', '$location', '$timeout', 'store', function($q, $rootScope, $location, $timeout, store) {
         return{
@@ -104,4 +105,6 @@ app.config(['$routeProvider', '$httpProvider', function ($routeProvider, $httpPr
         };
     }]);
 
+    $mdThemingProvider.theme('default')
+        .primaryPalette('deep-orange');
 }]);
