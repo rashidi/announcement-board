@@ -72,12 +72,12 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', function ($
     $httpProvider.interceptors.push(['$q', '$rootScope', '$location', '$timeout', 'store', function($q, $rootScope, $location, $timeout, store) {
         return{
             request: function(config) {
-                //          delete $rootScope.errorKey;
-                var currentAuthorization = store.get('authorization');
+      //          delete $rootScope.errorKey;
+                var currentAuthorization = store.get('authorization_header');
                 var access_token = currentAuthorization ? currentAuthorization : null;
 
                 if (access_token) {
-                    config.headers.authorization = access_token;
+                    config.headers['Authorization'] = access_token;
                 }
 
                 if(!/\.html/.test(config.url)) {
