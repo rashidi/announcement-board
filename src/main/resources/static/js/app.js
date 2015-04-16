@@ -73,17 +73,17 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', function ($
             request: function(config) {
       //          delete $rootScope.errorKey;
                 var currentAuthorization = store.get('authorization');
-                var access_token = currentAuthorization ? currentAuthorization.token : null;
+                var access_token = currentAuthorization ? currentAuthorization : null;
 
                 if (access_token) {
                     config.headers.authorization = access_token;
                 }
 
-              if(!/\.html/.test(config.url)) {
-                  var defer = $q.defer();
-                  currentRequests.push(defer);
-                  config.timeout = defer.promise;
-              }
+                if(!/\.html/.test(config.url)) {
+                    var defer = $q.defer();
+                    currentRequests.push(defer);
+                    config.timeout = defer.promise;
+                }
 
                 return config;
             },
