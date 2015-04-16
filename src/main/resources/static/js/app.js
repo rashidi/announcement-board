@@ -1,40 +1,41 @@
 'use strict';
 
 /**
-* @ngdoc overview
-* @name announcementBoardApp
-* @description
-* # announcementBoardApp
-*
-* Main module of the application.
-*/
+ * @ngdoc overview
+ * @name announcementBoardApp
+ * @description
+ * # announcementBoardApp
+ *
+ * Main module of the application.
+ */
 var currentRequests = [];
 
 var app = angular.module('announcementBoardApp', [
-  'ngAnimate',
-  'ngRoute',
-  'ngMaterial',
-  'ngMessages',
-  'ngResource',
-  'angular-storage',
-  'announcementBoardApp.UserController',
-  'announcementBoardApp.UserService',
-  'announcementBoardApp.AuthorizationController',
-  'announcementBoardApp.AuthorizationService',
-  'announcementBoardApp.AnnouncementController'
+    'ngAnimate',
+    'ngRoute',
+    'ngMaterial',
+    'ngMessages',
+    'ngResource',
+    'angular-storage',
+    'announcementBoardApp.UserController',
+    'announcementBoardApp.UserService',
+    'announcementBoardApp.AuthorizationController',
+    'announcementBoardApp.AuthorizationService',
+    'announcementBoardApp.AnnouncementService',
+    'announcementBoardApp.AnnouncementController'
 ]);
 
 app.run(['$rootScope', function($rootScope) {
 
-  /**
-   * Cancel pending requests
-   */
-  $rootScope.$on('$routeChangeSuccess', function() {
-    angular.forEach(currentRequests, function(request) {
-      request.resolve(); // cancel
+    /**
+     * Cancel pending requests
+     */
+    $rootScope.$on('$routeChangeSuccess', function() {
+        angular.forEach(currentRequests, function(request) {
+            request.resolve(); // cancel
+        });
+        currentRequests = [];
     });
-    currentRequests = [];
-  });
 
 }]);
 
@@ -62,7 +63,7 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', function ($
         .when('/announcement',
         {
             templateUrl: 'views/announcement.html',
-            controller: 'TrackerController'
+            controller: 'AnnouncementController'
         })
         .otherwise({
             redirectTo: '/'
@@ -71,7 +72,7 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', function ($
     $httpProvider.interceptors.push(['$q', '$rootScope', '$location', '$timeout', 'store', function($q, $rootScope, $location, $timeout, store) {
         return{
             request: function(config) {
-      //          delete $rootScope.errorKey;
+                //          delete $rootScope.errorKey;
                 var currentAuthorization = store.get('authorization');
                 var access_token = currentAuthorization ? currentAuthorization : null;
 
@@ -88,19 +89,19 @@ app.config(['$routeProvider', '$httpProvider', '$mdThemingProvider', function ($
                 return config;
             },
             responseError: function(errorResponse) {
-              if (errorResponse.status === 401) {
-      //            $rootScope.error = 'global.server_errors.unauthorized';
-                  $timeout(function () {
-                      $location.path('/');
-                  }, 3000);
-              } else if(errorResponse.status !== 0) {
-      //          $rootScope.showErrorMsg = true; // general error message
-      //          $timeout(function() {
-      //            $rootScope.showErrorMsg = false;
-      //          }, 10000);
-              }
+                if (errorResponse.status === 401) {
+                    //            $rootScope.error = 'global.server_errors.unauthorized';
+                    $timeout(function () {
+                        $location.path('/');
+                    }, 3000);
+                } else if(errorResponse.status !== 0) {
+                    //          $rootScope.showErrorMsg = true; // general error message
+                    //          $timeout(function() {
+                    //            $rootScope.showErrorMsg = false;
+                    //          }, 10000);
+                }
 
-              return $q.reject(errorResponse);
+                return $q.reject(errorResponse);
             }
         };
     }]);
