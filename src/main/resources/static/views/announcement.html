@@ -1,7 +1,7 @@
-<div ng-controller="AnnouncementController" layout-padding layout-margin layout="row" layout-sm="column">
+<div ng-controller="AnnouncementController" layout-padding layout-margin layout="column">
     <div flex>
         <form ng-submit="save()" name="announcementForm">
-            <md-content layout-padding layout="column" layout-sm="column">
+            <md-content layout-padding layout="column">
                 <md-input-container>
                     <label>Title</label>
                     <input type="text" placeholder="Summary of your annnouncement with no more than 50 characters" ng-model="title" ng-required="true" ng-minlength="2" ng-maxlength="50" />
