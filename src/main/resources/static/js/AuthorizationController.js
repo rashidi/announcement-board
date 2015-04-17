@@ -4,11 +4,11 @@ var module = angular.module('announcementBoardApp.AuthorizationController',[]);
 
 module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Scopes', 'Authorization', function($scope, $location, $mdToast, store, Scopes, Authorization) {
 
-     $scope.auth = {};
      Scopes.store('LoginCtrl', $scope);
-     store.set('loggedIn', false);
-     var authorization = store.get('authorization');
-     $scope.auth.username = authorization ? authorization.username : "" ;
+     $scope.auth = {};
+     $scope.isLoggedOut = store.get('loggedIn') ? angular.equals(store.get('loggedIn'),false) : true;
+
+//     $scope.auth.username = store.get('authorization') ? store.get('authorization').username : "" ;
 
      $scope.showSimpleToast = function(content) {
          $mdToast.show(
@@ -17,17 +17,7 @@ module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Sco
              .position('top right')
              .hideDelay(3000)
          );
-       };
-
-
-      $scope.isLoggedIn = function() {
-           return angular.equals(store.get('loggedIn'),true);
-      }
-
-      $scope.$on("$destroy", function() {
-          store.set('loggedIn', false);
-          store.set('authorization', null);
-       });
+     };
 
       $scope.submitUserLogin = function(auth) {
          Authorization.login(auth.username, auth.password).$promise.then(function success(response) {
@@ -37,10 +27,16 @@ module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Sco
                 $scope.loginMessages = {usernamePassword: false};
                 store.set('authorization', response);
                 store.set('authorization_header', "Basic "+ window.btoa(response.username +":"+ response.token));
-                $scope.showSimpleToast('You are successfully logged in!');
+
                 angular.copy({}, auth);
                 store.set('loggedIn', true);
+                $scope.isLoggedOut = angular.equals(store.get('loggedIn'),false);
+
+                Scopes.get('ProfileCtrl').isLoggedIn = angular.equals(store.get('loggedIn'),false);
+                Scopes.get('ProfileCtrl').profile.username = store.get('authorization').username;
+
                 $location.path('/announcement');
+                $scope.showSimpleToast('You are successfully logged in!');
              }
 
          }).catch(function(error) {
@@ -49,5 +45,33 @@ module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Sco
             }
          });
       };
+
+}]);
+
+module.controller('ProfileCtrl', ['$scope', '$location', '$mdToast', 'store', 'Scopes', 'Authorization', function($scope, $location, $mdToast, store, Scopes, Authorization) {
+     Scopes.store('ProfileCtrl', $scope);
+     $scope.isLoggedIn = store.get('loggedIn') ? angular.equals(store.get('loggedIn'),false) : true;
+     $scope.profile = {};
+     $scope.profile.username = store.get('authorization') ? store.get('authorization').username : "" ;
+
+     $scope.showSimpleToast = function(content) {
+         $mdToast.show(
+           $mdToast.simple()
+             .content(content)
+             .position('top right')
+             .hideDelay(3000)
+         );
+     };
+
+     $scope.submitUserLogout = function(profile) {
+        angular.copy({}, profile);
+        store.set('loggedIn', false);
+        $scope.isLoggedIn = angular.equals(store.get('loggedIn'),false);
+        Scopes.get('LoginCtrl').isLoggedOut = angular.equals(store.get('loggedIn'),false);
+        store.remove('authorization', null);
+        store.remove('authorization_header', null);
+        $location.path('/');
+        $scope.showSimpleToast('You are successfully logged out!');
+     }
 
 }]);
