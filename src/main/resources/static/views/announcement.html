@@ -1,15 +1,30 @@
-<div ng-controller="TrackerController">
-    <form ng-submit="addAnnouncement()" name="announcementForm">
-        <input type="text" placeholder="Title of your announcement" ng-model="announcementTitle" />
-        <textarea ng-mode="announcement" placeholder="Say something very long"></textarea>
-        <button>Announce!</button>
-    </form>
-    <hr />
-    <p ng-repeat="announcement in announcements | orderBy: 'created':true">
-        <time>{{ announcement.created | date:'dd-MM-yyyy HH:mm' }}</time>
-        <span>announcement.username</span>
-        <span>announcement.title</span>
-        <span>announcement.content</span>
-    </p>
+<div ng-controller="AnnouncementController" layout-padding layout-margin layout="column">
+    <div flex>
+        <form ng-submit="save()" name="announcementForm">
+            <md-content layout-padding layout="column">
+                <md-input-container>
+                    <label>Title</label>
+                    <input type="text" placeholder="Summary of your annnouncement with no more than 50 characters" ng-model="title" ng-required="true" ng-minlength="2" ng-maxlength="50" />
+                </md-input-container>
+                <md-input-container>
+                    <label>Content</label>
+                    <textarea ng-model="content" placeholder="Your announcement" ng-required="true" ng-minlength="2"></textarea>
+                </md-input-container>
+                <md-button class="md-primary" md-ripple-size="full">Make Announcement!</md-button>
+            </md-content>
+        </form>
+    </div>
+    <div flex>
+        <md-content>
+            <md-list>
+                <md-list-item class="md-3-line" ng-repeat="announcement in announcements | orderBy: 'created':true">
+                    <div class="md-list-item-text">
+                        <h3>{{ announcement.title }}</h3>
+                        <h4>{{ announcement.username }} at <time>{{ announcement.created | date:'dd-MM-yyyy HH:mm' }}</time></h4>
+                        <p>{{ announcement.content }}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </div>
 </div>
-
