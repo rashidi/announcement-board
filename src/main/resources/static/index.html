@@ -1,14 +1,15 @@
 <!doctype html>
-<html class="no-js" ng-app="announcementBoardApp">
+<html lang="en" ng-app="announcementBoardApp">
 <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Annoucement Board</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -49,7 +50,8 @@
 </head>
 <body>
 <!--[if lt IE 7]>
-<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
 <![endif]-->
 
 <!-- Add your site or application content here -->
@@ -59,7 +61,10 @@
             <span>Announcement Board</span>
             <!-- fill up the space between left and right area -->
             <span flex></span>
-            <div data-ng-include="'views/login.html'" data-ng-controller="LoginCtrl" style="width:45%;height:70%" ng-hide="isLoggedIn()"></div>
+
+            <div data-ng-include="'views/login.html'" data-ng-controller="LoginCtrl" style="width:45%;height:70%"
+                 ng-show="isLoggedOut"></div>
+            <div data-ng-include="'views/profile.html'" data-ng-controller="ProfileCtrl" ng-hide="isLoggedIn"></div>
         </div>
     </md-toolbar>
 </div>
@@ -86,6 +91,8 @@
 <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
 <script src="bower_components/sockjs-client/dist/sockjs.js"></script>
 <script src="bower_components/stomp-websocket/lib/stomp.min.js"></script>
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
