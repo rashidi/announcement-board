@@ -40,7 +40,7 @@
     "boot",
     "stompjs"
   ],
-  "license": "WTFPL",
+  "license": "Public Domain",
   "bugs": {
     "url": "https://github.com/StarTrackDevKL/announcement-board/issues"
   },

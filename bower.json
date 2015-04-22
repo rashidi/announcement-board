@@ -16,7 +16,7 @@
     "boot",
     "stompjs"
   ],
-  "license": "WTFPL",
+  "license": "Public Domain",
   "private": true,
   "ignore": [
     "**/.*",
