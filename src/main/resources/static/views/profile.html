@@ -1,6 +1,6 @@
 <div class="btn-group" dropdown is-open="status.isopen">
     <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-        Welcome, {{profile.username}} <span class="caret"></span>
+        <ng-md-icon icon="person" style="fill: lightgreen" size="16"></ng-md-icon> {{profile.username}} <span class="caret"></span>
     </button>
     <ul class="dropdown-menu" role="menu">
         <li class="dropdown-menu-clickable"><a ng-click="submitUserLogout()">Log Out</a></li>

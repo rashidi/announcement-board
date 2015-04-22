@@ -1,6 +1,6 @@
 'use strict';
 
-var module = angular.module('announcementBoardApp.AuthorizationController',['ui.bootstrap']);
+var module = angular.module('announcementBoardApp.AuthorizationController',['ui.bootstrap', 'ngMdIcons']);
 
 module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Scopes', 'Authorization', function($scope, $location, $mdToast, store, Scopes, Authorization) {
 
