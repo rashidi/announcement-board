@@ -109,3 +109,7 @@ body {
     border-bottom: 0;
   }
 }
+
+.dropdown-menu-clickable {
+  cursor: pointer;
+}

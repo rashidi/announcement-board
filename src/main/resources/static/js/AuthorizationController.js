@@ -1,12 +1,20 @@
 'use strict';
 
-var module = angular.module('announcementBoardApp.AuthorizationController',[]);
+var module = angular.module('announcementBoardApp.AuthorizationController',['ui.bootstrap']);
 
 module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Scopes', 'Authorization', function($scope, $location, $mdToast, store, Scopes, Authorization) {
 
      Scopes.store('LoginCtrl', $scope);
      $scope.auth = {};
      $scope.isLoggedOut = store.get('loggedIn') ? angular.equals(store.get('loggedIn'),false) : true;
+
+     if(!$scope.isLoggedOut){
+        var path = $location.path();
+        if(path !== "/announcement"){
+            $location.path('/announcement');
+            $location.replace();
+        }
+     }
 
 //     $scope.auth.username = store.get('authorization') ? store.get('authorization').username : "" ;
 
@@ -36,6 +44,7 @@ module.controller('LoginCtrl', ['$scope', '$location', '$mdToast', 'store', 'Sco
                 Scopes.get('ProfileCtrl').profile.username = store.get('authorization').username;
 
                 $location.path('/announcement');
+                $location.replace();
                 $scope.showSimpleToast('You are successfully logged in!');
              }
 
@@ -71,6 +80,7 @@ module.controller('ProfileCtrl', ['$scope', '$location', '$mdToast', 'store', 'S
         store.remove('authorization', null);
         store.remove('authorization_header', null);
         $location.path('/');
+        $location.replace();
         $scope.showSimpleToast('You are successfully logged out!');
      }
 
