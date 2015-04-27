@@ -1,8 +1,7 @@
-<div class="btn-group" dropdown is-open="status.isopen">
-    <button type="button" class="btn btn-primary dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-        <ng-md-icon icon="person" style="fill: lightgreen" size="16"></ng-md-icon> {{profile.username}} <span class="caret"></span>
-    </button>
-    <ul class="dropdown-menu" role="menu">
-        <li class="dropdown-menu-clickable"><a ng-click="submitUserLogout()">Log Out</a></li>
-    </ul>
+<div>
+    <md-button class="md-fab md-primary" aria-label="logout" ng-click="submitUserLogout()">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="#000000" d="M17,17.25V14H10V10H17V6.75L22.25,12L17,17.25M13,2A2,2 0 0,1 15,4V8H13V4H4V20H13V16H15V20A2,2 0 0,1 13,22H4A2,2 0 0,1 2,20V4A2,2 0 0,1 4,2H13Z" />
+        </svg>
+    </md-button>
 </div>
