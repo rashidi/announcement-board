@@ -2,7 +2,7 @@ import org.apache.tools.ant.filters.*
 
 buildscript {
     ext {
-        springBootVersion = '1.2.3.RELEASE'
+        springBootVersion = '1.2.4.RELEASE'
     }
     repositories {
         mavenCentral()
